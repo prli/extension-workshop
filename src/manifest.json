@@ -1,0 +1,6 @@
+{
+    "name": "Spongemock it",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "Converts text to the spongebob mocking format. Demo Chrome Extension Workshop."
+}
