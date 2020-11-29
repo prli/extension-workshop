@@ -6,7 +6,7 @@ function spongeMockIt(text) {
 }
 
 // recursively go through all DOM nodes and apply spongeMockIt() on it
-function spongeMockAll(node) {
+function spongeMockAll(node, regex) {
     node.childNodes.forEach(function (el) {
         // If this is a text node
         if (el.nodeType === Node.TEXT_NODE) {
@@ -14,15 +14,20 @@ function spongeMockAll(node) {
             if (el.parentNode.nodeName !== 'SCRIPT' && el.parentNode.nodeName !== 'STYLE') {
                 // Ignore this node it it an empty text node
                 if (el.nodeValue.trim() !== "") {
-                    el.textContent = spongeMockIt(el.textContent);
+                    // Only if regex exists and matches
+                    if (!!regex && el.textContent.trim().match(regex, 'i')) {
+                        el.textContent = spongeMockIt(el.textContent);
+                    }
                 }
             }
         } else {
             // Else recurse on this node
-            spongeMockAll(el);
+            spongeMockAll(el, regex);
         }
     });
 }
 
 // run spongeMockIt on body of document
-spongeMockAll(document.body);
+chrome.storage.sync.get('regex', function (data) {
+    spongeMockAll(document.body, data.regex);
+});
