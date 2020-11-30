@@ -19,5 +19,14 @@
     },
     "permissions": [
         "storage"
-    ]
+    ],
+    "browser_action": {
+        "default_icon": {
+            "16": "spongemock.png",
+            "24": "spongemock.png",
+            "32": "spongemock.png"
+        },
+        "default_title": "SpongeMock It",
+        "default_popup": "popup.html"
+    }
 }
