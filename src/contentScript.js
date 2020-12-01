@@ -31,3 +31,20 @@ function spongeMockAll(node, regex) {
 chrome.storage.sync.get('regex', function (data) {
     spongeMockAll(document.body, data.regex);
 });
+
+// event for highlight text
+window.addEventListener('mouseup', (event) => {
+    var selectedText = window.getSelection().toString();
+    selectedText = selectedText.replace(/\n/g, ' ').trim();
+
+    if (selectedText.length > 0) {
+        let msg = {
+            action: 'highlight',
+            content: selectedText,
+        };
+        
+        console.log('sending msg: ', msg);
+        // pass highlight event as msg to extension
+        chrome.runtime.sendMessage(msg);
+    }
+});

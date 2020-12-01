@@ -18,7 +18,8 @@
         "open_in_tab": false
     },
     "permissions": [
-        "storage"
+        "storage",
+        "contextMenus"
     ],
     "browser_action": {
         "default_icon": {
@@ -28,5 +29,11 @@
         },
         "default_title": "SpongeMock It",
         "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
     }
 }
